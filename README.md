@@ -73,24 +73,65 @@ npm install webpack@3.1.0 babel-core@6.25.0 --save-dev
 ```
 * No arquivo `client/package.json` remover os scripts `build` e `watch` e incluir `"build-dev": "webpack --config webpack.config.js"`
 * Executar `npm run build-dev` que irá resutlar em erro pois não registramos o babel para o webpack ainda 
-```ssh
-ERROR in ./app-src/controllers/NegociacaoController.js
-Module parse failed: /home/jeiel.lopes/development/github/jeielml/alura-webpack/client/app-src/controllers/NegociacaoController.js Unexpected character '@' (5:0)
-You may need an appropriate loader to handle this file type.
-| import { getNegociacaoDao, Bind, getExceptionMessage, debounce, controller, bindEvent } from '../util/index.js';
-| 
-| @controller('#data', '#quantidade', '#valor')
-| export class NegociacaoController {
-| 
- @ ./app-src/app.js 1:0-77
-npm ERR! code ELIFECYCLE
-npm ERR! errno 2
-npm ERR! client@1.0.0 build-dev: `webpack --config webpack.config.js`
-npm ERR! Exit status 2
-npm ERR! 
-npm ERR! Failed at the client@1.0.0 build-dev script.
-npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
 
-npm ERR! A complete log of this run can be found in:
-npm ERR!     /home/jeiel.lopes/.npm/_logs/2021-04-06T01_19_16_861Z-debug.log
+```ssh
+    ERROR in ./app-src/controllers/NegociacaoController.js
+    Module parse failed: /home/jeiel.lopes/development/github/jeielml/alura-webpack/client/app-src/controllers/NegociacaoController.js Unexpected character '@' (5:0)
+    You may need an appropriate loader to handle this file type.
+    | import { getNegociacaoDao, Bind, getExceptionMessage, debounce, controller, bindEvent } from '../util/index.js';
+    | 
+    | @controller('#data', '#quantidade', '#valor')
+    | export class NegociacaoController {
+    | 
+    @ ./app-src/app.js 1:0-77
+    npm ERR! code ELIFECYCLE
+    npm ERR! errno 2
+    npm ERR! client@1.0.0 build-dev: `webpack --config webpack.config.js`
+    npm ERR! Exit status 2
+    npm ERR! 
+    npm ERR! Failed at the client@1.0.0 build-dev script.
+    npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+    npm ERR! A complete log of this run can be found in:
+    npm ERR!     /home/jeiel.lopes/.npm/_logs/2021-04-06T01_19_16_861Z-debug.log
 ```
+----
+
+# Babel-loader, a ponte entre o Webpack e o Babel (Aula 1, Atividade 11)
+
+* Instalar o babel-loader
+```ssh
+npm install babel-loader@7.1.0 --save-dev
+```
+
+* Configurar o babel-loader no webpack em `client/webpack.config.js`
+```
+...
+module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            }
+        ]
+    }
+```
+
+
+* Executar `npm run build-dev` que irá resutlar em warning por incompatibilidade do system.js
+```
+WARNING in ./app-src/app.js
+System.register is not supported by webpack.
+```
+
+* Remover `System.js` do `client/.babelrc` (`"transform-es2015-modules-systemjs",`)
+
+* Desinstalar o módulo do babel que transforma os módulos de ES para JS
+```ssh
+npm uninstall babel-plugin-transform-es2015-modules-systemjs --save-dev
+```
+
+* Executar `npm run build-dev` com sucesso
+client/.babelrc
