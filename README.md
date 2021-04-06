@@ -215,3 +215,26 @@ npm ERR!     /home/jeiel.lopes/.npm/_logs/2021-04-06T10_28_21_985Z-debug.log
     npm run build-prod
     ```
 
+# Mudando o ambiente com cross-env (Aula 2, Atividade 3)
+
+Esta configuração busca viabilizar que com o mesmo código fonte seja possível executar o projeto em diferentes sistemas operacionais.
+
+* Instalar o `cross-env`
+```ssh
+npm install cross-env@5.0.1 --save-dev
+```
+
+* Alterar `client/package.json` >`build-prod`, adicionando o comando `cross-env`
+```ssh
+"build-prod": "cross-env NODE_ENV=production webpack  --config webpack.config.js"
+```
+
+* Testando se está tudo funcionando    
+  * Nao pode quebrar
+    ```ssh
+    npm run build-dev
+    ```
+   * O arquivo `client/dist/bundle.js` deverá ficar minificado
+    ```ssh
+    npm run build-prod
+    ```
