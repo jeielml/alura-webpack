@@ -238,3 +238,15 @@ npm install cross-env@5.0.1 --save-dev
     ```ssh
     npm run build-prod
     ```
+
+# O que aprendemos neste capítulo?
+
+Neste capítulo vimos:
+
+* O efeito do parâmetro -p para o build de produção.
+* A incompatibilidade do UglifyJS com código que não sejam escritos em ECMASCRIPT 5.
+* babili como plugin que ajuda no processo de minificação.
+* pegadinhas na atribuição de variáveis de ambiente.
+* o módulo cross-env para garantir compatibilidade do nosso npm script entre diferentes sistemas operacionais.    
+
+----
