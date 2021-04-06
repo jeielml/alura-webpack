@@ -149,3 +149,69 @@ Aprendemos neste capítulo:
 * Instalação e configuração de um loader
 
 ----
+
+# Preparando o Build de produção (Aula 02 -  Atividdade 1)
+
+* No arquivo `client/package.json` incluir o script `build-prod`, o parâmetro `-p` realiza o "Uglify" do JS
+```ssh
+    "build-prod": "webpack -p --config webpack.config.js"
+```
+
+* Ao executar `npm run build-prod` ocorre o seguinte erro pois o Uglify suporta até ES 2015 e estamos utilizando ES 8 (2017):
+```ssh
+ERROR in bundle.js from UglifyJs
+Unexpected token: name (Negociacao) [bundle.js:75,4]
+npm ERR! code ELIFECYCLE
+npm ERR! errno 2
+npm ERR! client@1.0.0 build-prod: `webpack -p --config webpack.config.js`
+npm ERR! Exit status 2
+npm ERR! 
+npm ERR! Failed at the client@1.0.0 build-prod script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/jeiel.lopes/.npm/_logs/2021-04-06T10_28_21_985Z-debug.log
+```
+
+* Substituir o parâmetro `-p` que utiliza Uglify pelo babily
+
+  * Instalar o Babili
+     ```ssh
+     npm install babili-webpack-plugin@0.1.1 --save-dev
+     ```
+  * Configurar o NODE_ENV no `client/package.json` >`build-prod`
+     ```ssh
+     "build-prod": "NODE_ENV=production webpack --config webpack.config.js"
+     ```
+  * Configurar o Babili no `client/webpack.config.js`
+     ```ssh
+     const babiliPlugin = require('babili-webpack-plugin');
+
+     let plugins = [];
+     ```
+
+     ```ssh
+     ...
+      module: {
+        ...
+        plugins: plugins
+      }
+     ```
+  * Incluir plugins no `client/webpack.config.js` 
+    ```ssh
+    if(process.env.NODE_ENV == 'production') {
+        plugins.push(new babiliPlugin());
+    }
+
+    ```
+
+* Testando se está tudo funcionando    
+  * Nao pode quebrar
+    ```ssh
+    npm run build-dev
+    ```
+   * O arquivo `client/dist/bundle.js` deverá ficar minificado
+    ```ssh
+    npm run build-prod
+    ```
+
