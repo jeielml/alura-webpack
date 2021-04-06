@@ -63,3 +63,34 @@ npm uninstall systemjs --save
 ```ssh
 npm install webpack@3.1.0 babel-core@6.25.0 --save-dev
 ```
+
+
+# O temível webpack.config.js (Aula1, Atividade 7)
+
+* Criar o arquivo `client/webpack.config.js` que é um módulo do nodejs que indica o ponto de entrada da aplicação
+```
+ Lembre-se que é a plataforma Node.js que executa o Webpack para nós. Aliás, o sistema de módulos da plataforma utilizado pela plataforma é o CommonJS. Diferente do ESM módulos, o CommonJS utiliza a sintaxe require e module.exports
+```
+* No arquivo `client/package.json` remover os scripts `build` e `watch` e incluir `"build-dev": "webpack --config webpack.config.js"`
+* Executar `npm run build-dev` que irá resutlar em erro pois não registramos o babel para o webpack ainda 
+```ssh
+ERROR in ./app-src/controllers/NegociacaoController.js
+Module parse failed: /home/jeiel.lopes/development/github/jeielml/alura-webpack/client/app-src/controllers/NegociacaoController.js Unexpected character '@' (5:0)
+You may need an appropriate loader to handle this file type.
+| import { getNegociacaoDao, Bind, getExceptionMessage, debounce, controller, bindEvent } from '../util/index.js';
+| 
+| @controller('#data', '#quantidade', '#valor')
+| export class NegociacaoController {
+| 
+ @ ./app-src/app.js 1:0-77
+npm ERR! code ELIFECYCLE
+npm ERR! errno 2
+npm ERR! client@1.0.0 build-dev: `webpack --config webpack.config.js`
+npm ERR! Exit status 2
+npm ERR! 
+npm ERR! Failed at the client@1.0.0 build-dev script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/jeiel.lopes/.npm/_logs/2021-04-06T01_19_16_861Z-debug.log
+```
