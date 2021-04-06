@@ -147,3 +147,5 @@ Aprendemos neste capítulo:
 * O conceito de entry e output
 * O papel de um loader
 * Instalação e configuração de um loader
+
+----
