@@ -135,3 +135,15 @@ npm uninstall babel-plugin-transform-es2015-modules-systemjs --save-dev
 
 * Executar `npm run build-dev` com sucesso
 client/.babelrc
+
+# Resumo do conteúdo capítulo
+
+Aprendemos neste capítulo:
+
+* O papel do webpack
+* Instalação através do npm
+* Configuração do webpack.config.js
+* Como executar webpack através de um npm script
+* O conceito de entry e output
+* O papel de um loader
+* Instalação e configuração de um loader
