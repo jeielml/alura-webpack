@@ -266,3 +266,40 @@ app.use(express.static(app.get('clientPath')));
 * Acessar o arquivo `client/app-src/domain/negociacao/NegociacaoService.js` e editar o host das requisições http adicionando `http://localhost:3000`
 
 * Acessar o arquivo `client/app-src/app.js` e editar o hosto do fetch
+
+## Instalando o webpack dev server (Aula 03, Atividade 2)
+
+
+```ssh
+cd client &&
+npm install webpack-dev-server@2.5.1 --save-dev
+```
+
+* Adicionar novo script no arquivo `client/package.json`
+```js
+"start": "webpack-dev-server"
+```
+
+* Remover a pasta `client/dist` pois o webpack dev server nao gera o bundle na pasta dist mas em memória
+
+* Configurar o Web pack para fazer a geraçao do bundle "na pasta dist", acessando o arquivo `client/webpack.config.js` e adicionando no `output` a propriedade `publicPath`
+```js
+output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: 'dist'
+    },
+```   
+
+O Webpack dev server faz live reload da aplicação
+
+
+## Neste capítulo vimos:
+
+* O papel do Webpack Dev Server e suas vantagens como live reloading
+* Como instalar o Webpack Dev Server através do npm
+* A criação de um script para executar o servidor
+* A importância da propriedade publicPath.
+
+
+
