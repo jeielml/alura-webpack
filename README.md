@@ -250,3 +250,19 @@ Neste capítulo vimos:
 * o módulo cross-env para garantir compatibilidade do nosso npm script entre diferentes sistemas operacionais.    
 
 ----
+
+# Webpack Dev Server e configuração (Aula 03)
+
+## Adequando a aplicação (Aula 03, Atividade 1)
+
+* No arquivo `server/config/express.js` comentar as linhas 9-11 para que o server não exponha mais os Js e arquivos estáticos da aplicação
+```js
+/*
+app.set('clientPath', path.join(__dirname, '../..', 'client'));
+console.log(app.get('clientPath'));
+app.use(express.static(app.get('clientPath')));
+*/
+```
+* Acessar o arquivo `client/app-src/domain/negociacao/NegociacaoService.js` e editar o host das requisições http adicionando `http://localhost:3000`
+
+* Acessar o arquivo `client/app-src/app.js` e editar o hosto do fetch
